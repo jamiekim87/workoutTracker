@@ -17,8 +17,8 @@ router.post('/workouts', passport.authenticate('jwt'), (req, res) => {
         isDone: req.body.isDone, 
         user: req.user._id
     })
-        .then(item => {
-            User.findByIdAndUpdate(item.user, { $push: { workouts: workout._id } })
+        .then(workout => {
+            User.findByIdAndUpdate(workout.user, { $push: { workouts: workout._id } })
                 .then(() => res.json(workout))
                 .catch(err => console.log(err))
         })
@@ -33,7 +33,7 @@ router.put('/workouts/:id', passport.authenticate('jwt'), (req, res) => {
 })
 
 // DELETE one workout 
-router.delete('/items/:id', passport.authenticate('jwt'), (req, res) => {
+router.delete('/workouts/:id', passport.authenticate('jwt'), (req, res) => {
     Workout.findByIdAndDelete(req.params.id)
         .then(() => res.sendStatus(200))
         .catch(err => console.log(err))
