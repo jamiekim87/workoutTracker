@@ -23,5 +23,5 @@ router.put('/workouts/:id', (req, res) => {
     .catch(err => console.log(err))
 })
 
-
+// Exporting routes
 module.exports = router
